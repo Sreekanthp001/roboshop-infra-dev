@@ -300,6 +300,15 @@ resource "aws_security_group_rule" "catalogue_vpn_ssh" {
   security_group_id = module.catalogue.sg_id
 }
 
+resource "aws_security_group_rule" "catalogue_bastion_ssh" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.catalogue.sg_id
+}
+
 resource "aws_security_group_rule" "catalogue_vpn_http" {
   type              = "ingress"
   from_port         = 8080
@@ -308,6 +317,15 @@ resource "aws_security_group_rule" "catalogue_vpn_http" {
   source_security_group_id = module.vpn.sg_id
   security_group_id = module.catalogue.sg_id
 }
+/* 
+resource "aws_security_group_rule" "catalogue_bastion_http" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.catalogue.sg_id
+} */
 
 resource "aws_security_group_rule" "catalogue_backend_alb" {
   type              = "ingress"
@@ -328,6 +346,15 @@ resource "aws_security_group_rule" "user_vpn_ssh" {
   security_group_id = module.user.sg_id
 }
 
+resource "aws_security_group_rule" "user_bastion_ssh" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.user.sg_id
+}
+
 resource "aws_security_group_rule" "user_vpn_http" {
   type              = "ingress"
   from_port         = 8080
@@ -336,6 +363,15 @@ resource "aws_security_group_rule" "user_vpn_http" {
   source_security_group_id = module.vpn.sg_id
   security_group_id = module.user.sg_id
 }
+
+/* resource "aws_security_group_rule" "user_bastion_http" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.user.sg_id
+} */
 
 resource "aws_security_group_rule" "user_backend_alb" {
   type              = "ingress"
@@ -356,6 +392,15 @@ resource "aws_security_group_rule" "cart_vpn_ssh" {
   security_group_id = module.cart.sg_id
 }
 
+resource "aws_security_group_rule" "cart_bastion_ssh" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.cart.sg_id
+}
+
 resource "aws_security_group_rule" "cart_vpn_http" {
   type              = "ingress"
   from_port         = 8080
@@ -364,6 +409,15 @@ resource "aws_security_group_rule" "cart_vpn_http" {
   source_security_group_id = module.vpn.sg_id
   security_group_id = module.cart.sg_id
 }
+
+/* resource "aws_security_group_rule" "cart_bastion_http" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.cart.sg_id
+} */
 
 resource "aws_security_group_rule" "cart_backend_alb" {
   type              = "ingress"
@@ -384,6 +438,15 @@ resource "aws_security_group_rule" "shipping_vpn_ssh" {
   security_group_id = module.shipping.sg_id
 }
 
+resource "aws_security_group_rule" "shipping_bastoin_ssh" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.shipping.sg_id
+}
+
 resource "aws_security_group_rule" "shipping_vpn_http" {
   type              = "ingress"
   from_port         = 8080
@@ -392,6 +455,15 @@ resource "aws_security_group_rule" "shipping_vpn_http" {
   source_security_group_id = module.vpn.sg_id
   security_group_id = module.shipping.sg_id
 }
+
+/* resource "aws_security_group_rule" "shipping_bastion_http" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.shipping.sg_id
+} */
 
 resource "aws_security_group_rule" "shipping_backend_alb" {
   type              = "ingress"
@@ -412,6 +484,15 @@ resource "aws_security_group_rule" "payment_vpn_ssh" {
   security_group_id = module.payment.sg_id
 }
 
+resource "aws_security_group_rule" "payment_bastion_ssh" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.payment.sg_id
+}
+
 resource "aws_security_group_rule" "payment_vpn_http" {
   type              = "ingress"
   from_port         = 8080
@@ -420,6 +501,15 @@ resource "aws_security_group_rule" "payment_vpn_http" {
   source_security_group_id = module.vpn.sg_id
   security_group_id = module.payment.sg_id
 }
+
+/* resource "aws_security_group_rule" "payment_bastion_http" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.payment.sg_id
+} */
 
 resource "aws_security_group_rule" "payment_backend_alb" {
   type              = "ingress"
@@ -439,6 +529,16 @@ resource "aws_security_group_rule" "backend_alb_vpn" {
   source_security_group_id = module.vpn.sg_id
   security_group_id = module.backend_alb.sg_id
 }
+
+resource "aws_security_group_rule" "backend_alb_bastion" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.backend_alb.sg_id
+}
+
 resource "aws_security_group_rule" "backend_alb_frontend" {
   type              = "ingress"
   from_port         = 80
@@ -482,6 +582,15 @@ resource "aws_security_group_rule" "frontend_vpn" {
   to_port           = 22
   protocol          = "tcp"
   source_security_group_id = module.vpn.sg_id
+  security_group_id = module.frontend.sg_id
+}
+
+resource "aws_security_group_rule" "frontend_bastion" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
   security_group_id = module.frontend.sg_id
 }
 
@@ -559,6 +668,43 @@ resource "aws_security_group_rule" "vpn_943" {
   security_group_id = module.vpn.sg_id
 }
 
+#Bastion ports 22, 443, 1194,943
+/* resource "aws_security_group_rule" "bastion_ssh" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = module.bastion.sg_id
+}
+
+resource "aws_security_group_rule" "bastion_https" {
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = module.bastion.sg_id
+}
+
+resource "aws_security_group_rule" "bastion_1194" {
+  type              = "ingress"
+  from_port         = 1194
+  to_port           = 1194
+  protocol          = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = module.bastion.sg_id
+}
+
+resource "aws_security_group_rule" "bastion_943" {
+  type              = "ingress"
+  from_port         = 943
+  to_port           = 943
+  protocol          = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = module.bastion.sg_id
+}
+
 # backend ALB accepting connections from my bastion host on port no 80
 resource "aws_security_group_rule" "backend_alb_bastion" {
   type              = "ingress"
@@ -567,4 +713,4 @@ resource "aws_security_group_rule" "backend_alb_bastion" {
   protocol          = "tcp"
   source_security_group_id = module.bastion.sg_id
   security_group_id = module.backend_alb.sg_id
-}
+} */
